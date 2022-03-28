@@ -64,7 +64,6 @@ public class Enemy : MonoBehaviour
         Vector3 temPos = pos; // temporary position
         temPos.y -= speed * Time.deltaTime;
         pos = temPos;
-
     }
 
 }
