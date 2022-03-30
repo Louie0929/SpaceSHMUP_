@@ -3,7 +3,7 @@
  * Date Created: March 16, 2022
  * 
  * Last Edited by: Xingzhou Li
- * Last Edited: March 16, 2022
+ * Last Edited: March 30, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -20,6 +20,9 @@ public class Hero : MonoBehaviour
 
     #region PlayerShip Singleton
     static public Hero SHIP; //refence GameManager
+
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 40;
    
     //Check to make sure only one gm of the GameManager is in the scene
     void CheckSHIPIsInScene()
@@ -107,6 +110,12 @@ public class Hero : MonoBehaviour
         //Rotate the ship to make more dynamic feel
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
+        // Allow the ship to fire
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TempFire();
+        }// end space 
+
     }//end Update()
 
 
@@ -133,5 +142,19 @@ public class Hero : MonoBehaviour
         }
 
     }//end OnTriggerEnter()
+
+    void TempFire()
+    {
+        GameObject projGo = Instantiate<GameObject>(projectilePrefab);
+        projGo.transform.position = transform.position;
+        Rigidbody rb = projGo.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.up * projectileSpeed;
+
+    } // end TempFire()
+
+    public void AddScore(int value)
+    {
+        gm.UpdateScore(value);
+    }
 
 }
