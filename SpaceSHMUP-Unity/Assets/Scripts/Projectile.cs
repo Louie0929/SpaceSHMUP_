@@ -28,7 +28,8 @@ public class Projectile : MonoBehaviour
         // if off screen up 
         if (bndCheck.offUp)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            bndCheck.offUp = false; // reset the boundary settings
         }
     } // end Update()
 }

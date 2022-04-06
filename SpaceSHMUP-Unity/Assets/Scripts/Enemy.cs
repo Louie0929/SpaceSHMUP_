@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         if(otherGO.tag == "Projectile Hero")
         {
             Debug.Log("Enemy hit by Projectile Hero " + otherGO.name);
-            Destroy(otherGO);
+            otherGO.SetActive(false);
             Hero.SHIP.AddScore(score);
             Destroy(gameObject);
         }
